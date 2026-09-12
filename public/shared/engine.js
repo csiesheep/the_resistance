@@ -103,11 +103,16 @@ export function mustAct(state) {
   }
 }
 
+// The state is plain JSON (arrays, numbers, strings, booleans, null), so this
+// is a complete copy. Chosen over structuredClone, which crashed V8 (Node 24)
+// under the bot harness's allocation pressure.
+export const clone = (x) => JSON.parse(JSON.stringify(x));
+
 // ---------- the reducer ----------
 // Returns a new state; the input is never mutated. Illegal actions throw, and
 // the message says why, so the UI can gate buttons with the same checks.
 export function apply(prev, action) {
-  const st = structuredClone(prev);
+  const st = clone(prev);
   st.event = null;
   const seat = action.seat;
   const checkSeat = () => {
@@ -249,11 +254,11 @@ export function view(state, seat = null) {
     // fails is ever published, through rounds[].result.
     played: state.played ? state.proposal.map((s) => state.played[s] !== null) : null,
     myCard: state.played && seat !== null ? state.played[seat] : null,
-    rounds: structuredClone(state.rounds),
+    rounds: clone(state.rounds),
     score: { ...state.score },
     winner: state.winner,
     reason: state.reason,
-    event: state.event ? structuredClone(state.event) : null,
+    event: state.event ? clone(state.event) : null,
     waitingOn: mustAct(state),
   };
   return v;
