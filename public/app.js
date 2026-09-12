@@ -194,9 +194,11 @@ const failsText = (fails, n) => (fails === 0 ? t("table.noFails") : t(fails === 
 // ---------- rooms ----------
 const wsBase = () => (location.protocol === "https:" ? "wss://" : "ws://") + location.host + location.pathname.replace(/[^/]*$/, "") + "ws";
 function connect(params) {
+  const same = game.mode === "net" && game.code === params.code; // a reconnect keeps picks and the peeked flag
   leaveRoom(true);
   game.mode = "net"; game.st = null; game.view = null; game.lobby = null; game.closed = false;
-  game.log = []; game.stage = null; game.names = []; game.me = null; game.gen = -1;
+  game.log = []; game.stage = null; game.names = []; game.me = null;
+  if (!same) { game.gen = -1; game.picks = new Set(); }
   const q = new URLSearchParams({ name: setup.name || t("setup.defaultName"), lang });
   if (params.create) q.set("create", "1");
   else { q.set("room", params.code); const tok = sess.get("tr.token." + params.code); if (tok) q.set("token", tok); }
