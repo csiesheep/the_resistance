@@ -32,9 +32,10 @@
   .rules th { font: 600 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
   .rules td:first-child, .rules th:first-child { text-align: left; }
   .rules .wide { overflow-x: auto; }
-  .rules .zh { display: none; }
-  html[lang="zh-Hant"] .rules .en { display: none; }
-  html[lang="zh-Hant"] .rules .zh { display: block; }
+  .zh { display: none; }
+  html[lang="zh-Hant"] .en { display: none; }
+  html[lang="zh-Hant"] .zh { display: inline; }
+  html[lang="zh-Hant"] .rules > .zh { display: block; }
   .rules b.blue { color: var(--blue); } .rules b.red { color: var(--red); }
   .rules .foot { margin-top: 24px; }
 </style>
