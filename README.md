@@ -4,13 +4,13 @@ A browser version of *The Resistance*, the 5–10 player social-deduction game b
 
 Fan-made and unofficial. Own art and prose; the rules are the game's own.
 
-Live at https://games.csiesheep.com/the_resistance/ — a placeholder until the first playable milestone.
+Live at https://games.csiesheep.com/the_resistance/ — solo mode is playable; online rooms are the next milestone.
 
 ## How it works
 
 Everything runs on Cloudflare as one Worker, the same shape as [Dice Wars](https://github.com/csiesheep/dice_war):
 
-- `public/` is the client: landing, lobby and the table view, served as static assets. `public/shared/engine.js` will hold all rules (tables, phase machine, per-seat view projection) and `public/shared/bots.js` the AI, used unchanged by both the browser and the server.
+- `public/` is the client: landing, setup, lobby and the table view, served as static assets. `public/shared/engine.js` holds all rules (tables, phase machine, per-seat view projection), `public/shared/bots.js` the AI and `public/shared/talk.js` the bots' table talk, all used unchanged by both the browser and the server. Every player-visible string is in `public/i18n/`.
 - `src/index.js` is the Worker: the path-prefix router that serves `/the_resistance/…` plus, from the multiplayer milestone, the WebSocket entry point at `/the_resistance/ws`.
 - `src/room.js` (to come) is a Durable Object, one per room, named by its code. It is authoritative: it deals the roles, keeps the phase clock, runs the AI seats, and sends each seat only what that seat may see.
 
@@ -23,9 +23,9 @@ URLs are query strings on the page so the same build works at any prefix:
 ## Milestones
 
 1. **M0 Scaffold** — router, placeholder page, deploy. Done.
-2. **M1 Engine** — tables, phase machine, reducer, `view(state, seat)`, tests.
-3. **M2 Bots** — Bayesian suspicion model over spy sets, resistance and spy policies, three levels, a bot-vs-bot harness to tune win rates.
-4. **M3 Solo** — the full game against bots in the browser, with bot table talk.
+2. **M1 Engine** — tables, phase machine, reducer, `view(state, seat)`, tests. Done.
+3. **M2 Bots** — Bayesian suspicion model over spy sets, resistance and spy policies, three levels, a bot-vs-bot harness to tune win rates. Done.
+4. **M3 Solo** — the full game against bots in the browser, with bot table talk. Done.
 5. **M4 Rooms** — Durable Object, phase timers, chat, bot fill, disconnect takeover.
 6. **M5 Ship** — rules page, SEO, hub card, sitemap.
 
@@ -37,6 +37,13 @@ npm run dev
 ```
 
 Then open http://localhost:8787/the_resistance/.
+
+```bash
+npm test          # engine and bot tests
+npm run sim 300   # bot-vs-bot win rates per player count and level
+```
+
+The harness runs each cell in a child process with retries: Node 24 on the development machine dies with an access violation a few percent of the time on this workload, under any V8 flags.
 
 ## Deploy
 

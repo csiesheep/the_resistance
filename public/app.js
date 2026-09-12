@@ -344,7 +344,7 @@ function overHtml(v) {
   return `<div class="result-head"><span class="k">${esc(why)}</span><span class="sub">${esc(t("over.youWere", { role: mine ? t("roles.spy") : t("roles.resistance") }))} ${esc(won ? t("over.youWon") : t("over.youLost"))}</span></div>
     <span class="lab">${esc(t("over.spies"))}</span><div class="who">${chips}</div>
     <table class="h"><tr><th>${esc(t("over.hM"))}</th><th>${esc(t("over.hTeam"))}</th><th>${esc(t("over.hVote"))}</th><th>${esc(t("over.hResult"))}</th></tr>${rows}</table>
-    <div class="row"><a class="btn" href="rules.html">${esc(t("over.rules"))}</a><button type="button" id="btnAgain" class="btn p">${esc(t("over.again"))}</button></div>`;
+    <div class="row"><a class="btn" href="rules">${esc(t("over.rules"))}</a><button type="button" id="btnAgain" class="btn p">${esc(t("over.again"))}</button></div>`;
 }
 
 // ---------- reveal overlay ----------
