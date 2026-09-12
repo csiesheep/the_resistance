@@ -2,26 +2,86 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4VS3P3T58"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q4VS3P3T58');
+</script>
 <title>The Resistance &mdash; free online social deduction game, solo or with friends</title>
 <meta name="description" content="Play The Resistance in your browser: 5 to 10 players, two to four of them spies. Free, no install. Solo against AI bots, or open a room and share a four-letter code with friends. Fan-made, unofficial.">
 <link rel="canonical" href="https://games.csiesheep.com/the_resistance/">
-<!-- Placeholder page: keep it out of the index until the game is playable. -->
+<!-- Kept out of the index until the ship milestone. -->
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0e1116">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Barlow:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <h1>The<br>Resis<span>tance</span></h1>
-  <p>Five to ten of you. Two, three or four are spies. Coming soon.</p>
-  <p lang="zh-Hant">五到十人，其中兩到四人是間諜。即將推出。</p>
-  <p><small>Fan-made, unofficial. The Resistance is a game by Don Eskridge, published by Indie Boards &amp; Cards.</small></p>
-  <p><a href="https://games.csiesheep.com/">&larr; csiesheep games</a></p>
+
+<header class="top">
+  <a href="." data-link class="brand"><span data-t="title"></span></a>
+  <nav>
+    <a href="rules.html" data-t="nav.rules"></a>
+    <button type="button" id="langBtn" class="linkish" data-t="nav.lang"></button>
+  </nav>
+</header>
+
+<!-- ===== Landing ===== -->
+<main id="view-landing" class="scr" hidden>
+  <p class="hero" id="hero"></p>
+  <p class="tag-line" data-t="tagline"></p>
+  <div class="spacer"></div>
+  <button type="button" class="btn p" id="btnPlay" data-t="landing.play"></button>
+  <button type="button" class="btn" id="btnCreate" disabled data-t="landing.create"></button>
+  <div class="row">
+    <label class="field grow"><span data-t="landing.code"></span><input id="joinCode" maxlength="4" autocapitalize="characters" autocomplete="off" placeholder="_ _ _ _" disabled></label>
+    <button type="button" class="btn sm gh" id="btnJoin" disabled data-t="landing.join"></button>
+  </div>
+  <p class="foot muted" data-t="landing.soon"></p>
+  <p class="foot"><small data-t="credit"></small></p>
+  <p class="foot"><a href="https://games.csiesheep.com/">&larr; <span data-t="nav.hub"></span></a></p>
 </main>
+
+<!-- ===== Solo setup ===== -->
+<main id="view-setup" class="scr" hidden>
+  <div class="bar"><a href="." data-link data-t="nav.back"></a><span>solo</span></div>
+  <p class="ph"><span data-t="setup.title"></span><small id="setupSub"></small></p>
+  <span class="lab" data-t="setup.players"></span>
+  <div class="stepper"><button type="button" id="pMinus">&minus;</button><b id="pCount">7</b><button type="button" id="pPlus">+</button></div>
+  <div class="field small" id="pSummary"></div>
+  <span class="lab" data-t="setup.bots"></span>
+  <div class="seg" id="levelSeg">
+    <button type="button" data-level="easy" data-t="setup.easy"></button>
+    <button type="button" data-level="normal" class="on" data-t="setup.normal"></button>
+    <button type="button" data-level="hard" data-t="setup.hard"></button>
+  </div>
+  <span class="lab" data-t="setup.name"></span>
+  <label class="field"><input id="nameInput" maxlength="16" autocomplete="off"></label>
+  <label class="field check"><span data-t="setup.blind"></span><input type="checkbox" id="blindChk"></label>
+  <div class="spacer"></div>
+  <button type="button" class="btn p" id="btnStart" data-t="setup.start"></button>
+</main>
+
+<!-- ===== The table ===== -->
+<main id="view-table" class="scr" hidden>
+  <div class="bar"><span id="barLeft"></span><span id="barRight"></span></div>
+  <div class="track" id="track"></div>
+  <div class="vt" id="vtrack"></div>
+  <div class="ring" id="ring"></div>
+  <div id="panel"></div>
+  <div class="log" id="log" aria-live="polite"></div>
+</main>
+
+<!-- ===== Reveal / game over overlay ===== -->
+<div id="overlay" class="overlay" hidden></div>
+
+<script type="module" src="app.js"></script>
 </body>
 </html>
