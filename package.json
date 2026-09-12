@@ -1,0 +1,15 @@
+{
+  "name": "the_resistance",
+  "version": "0.1.0",
+  "description": "The Resistance in the browser: solo against AI bots, or online rooms with friends. Fan-made, unofficial. Cloudflare Worker + Durable Objects.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test tests/"
+  },
+  "devDependencies": {
+    "wrangler": "^4.131.0"
+  }
+}
