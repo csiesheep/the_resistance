@@ -86,7 +86,11 @@ html[lang="zh-Hant"] .hero { font-size: 54px; line-height: 1.05; letter-spacing:
 .seat.team .av { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-d); }
 .seat.pick .av { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-d); }
 .seat.spy .av { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-d); }
-.seat.spy.team .av { box-shadow: 0 0 0 3px var(--red-d), 0 0 0 5px var(--blue-d); }
+/* A spy seat that is also on the team or being picked keeps its red border
+   and takes the team / pick colour as an outer ring. */
+.seat.spy.team .av { box-shadow: 0 0 0 3px var(--red-d), 0 0 0 6px var(--blue); }
+.seat.spy.pick .av { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-d), 0 0 0 6px var(--gold); }
+.seat.pick .av { box-shadow: 0 0 0 3px var(--gold); }
 .seat.lead .av::before { content: ""; position: absolute; top: -10px; left: 50%; width: 14px; height: 10px; margin-left: -7px; background: var(--gold); clip-path: polygon(0 100%, 0 20%, 30% 55%, 50% 0, 70% 55%, 100% 20%, 100% 100%); }
 .seat.dim .av { opacity: .4; }
 .seat .nm { font-size: 11px; color: var(--ink); white-space: nowrap; max-width: 68px; overflow: hidden; text-overflow: ellipsis; }

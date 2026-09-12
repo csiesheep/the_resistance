@@ -377,7 +377,8 @@ function renderRing(v) {
     if (i === v.leader && v.phase !== "over") cls.push("lead");
     if (team.includes(i)) cls.push("team");
     if (proposing && game.picks.has(i)) cls.push("pick");
-    if (mySpies.includes(i) && i !== me && v.phase !== "over") cls.push("spy");
+    // A spy sees every spy in red, themself included; operatives see nothing.
+    if ((mySpies.includes(i) || (v.role === E.SPY && i === me)) && v.phase !== "over") cls.push("spy");
     if ((v.phase === "vote" || v.phase === "mission") && team.length && !team.includes(i) && !game.stage) cls.push("dim");
     if (proposing) cls.push("tappable");
     let badge = "";
