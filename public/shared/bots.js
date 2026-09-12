@@ -188,7 +188,7 @@ function resistanceDecision(view, lv, rng) {
     const team = view.proposal;
     const pf = pFail(sets, team, need);
     const forced = view.rejects >= E.MAX_REJECTS - 1;
-    let approve = forced || wouldApprove(pf, best.pf, view, lv);
+    let approve = forced || view.leader === me || wouldApprove(pf, best.pf, view, lv);
     if (!forced && rng.next() < lv.noise) approve = rng.next() < 0.6;
     const worst = team.filter((s) => s !== me).sort((a, b) => m[b] - m[a])[0];
     return { type: "vote", seat: me, approve, why: { forced, pFail: pf, bestPFail: best.pf, onTeam: team.includes(me), suspect: worst, suspectP: m[worst] } };
@@ -231,6 +231,7 @@ function spyDecision(view, lv, rng) {
     let approve;
     if (view.rejects >= E.MAX_REJECTS - 1) approve = false;          // the fifth rejection wins
     else if (decisive) approve = canSink;                              // this vote decides the game
+    else if (view.leader === me) approve = true;                       // nobody rejects their own team
     else if (rng.next() < lv.spyMimic) {
       // Vote as an operative in this seat would, from the outsider posterior
       // (which does not know I am a spy), so my votes carry no signal.

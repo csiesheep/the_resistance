@@ -159,3 +159,22 @@ table.h td { padding: 5px 6px; border-bottom: 1px solid var(--line); color: var(
 
 @media (prefers-reduced-motion: reduce) { .flip .card { transition: none; } .m.cur::after { animation: none; } }
 @media (prefers-reduced-motion: no-preference) { .m.cur::after { animation: pulse 2s ease-in-out infinite; } @keyframes pulse { 50% { opacity: .3; } } }
+
+/* lobby */
+.code { font-family: var(--mono); font-weight: 600; font-size: 44px; letter-spacing: .22em; text-align: center; color: var(--ink); padding: 6px 0 0; }
+.list { display: flex; flex-direction: column; gap: 6px; }
+.li { display: flex; align-items: center; gap: 10px; background: var(--g2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.li .av { width: 30px; height: 30px; font-size: 13px; flex: 0 0 auto; }
+.li .av.bot { border-style: dashed; }
+.li .nm { flex: 1; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.li .tag { font: 600 10px var(--mono); letter-spacing: .1em; color: var(--mute); border: 1px solid var(--line); padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+.li .tag.ok { color: var(--blue); border-color: var(--blue-d); }
+.li .tag.host { color: var(--gold); border-color: var(--gold-d); }
+.li .tag.off { color: var(--red); border-color: var(--red-d); }
+.li .tag.x { cursor: pointer; }
+.li.empty { border-style: dashed; color: var(--mute); justify-content: center; font-size: 13px; cursor: pointer; }
+.chat { display: flex; gap: 6px; }
+.chat .field { padding: 7px 10px; }
+.chat .btn.sm { flex: 0 0 44px; }
+.note.err { color: var(--red); }
+#lbLog { max-height: 120px; }

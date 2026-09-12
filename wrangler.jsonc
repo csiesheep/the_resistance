@@ -20,5 +20,14 @@
     "directory": "public",
     "binding": "ASSETS",
     "run_worker_first": true
-  }
+  },
+  // One Durable Object per multiplayer room, named by its four-letter code.
+  "durable_objects": {
+    "bindings": [
+      { "name": "ROOMS", "class_name": "Room" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["Room"] }
+  ]
 }

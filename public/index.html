@@ -39,12 +39,13 @@
   <p class="tag-line" data-t="tagline"></p>
   <div class="spacer"></div>
   <button type="button" class="btn p" id="btnPlay" data-t="landing.play"></button>
-  <button type="button" class="btn" id="btnCreate" disabled data-t="landing.create"></button>
+  <label class="field"><span data-t="landing.name"></span><input id="landName" maxlength="16" autocomplete="off"></label>
+  <button type="button" class="btn" id="btnCreate" data-t="landing.create"></button>
   <div class="row">
-    <label class="field grow"><span data-t="landing.code"></span><input id="joinCode" maxlength="4" autocapitalize="characters" autocomplete="off" placeholder="_ _ _ _" disabled></label>
-    <button type="button" class="btn sm gh" id="btnJoin" disabled data-t="landing.join"></button>
+    <label class="field grow"><span data-t="landing.code"></span><input id="joinCode" maxlength="4" autocapitalize="characters" autocomplete="off" placeholder="_ _ _ _"></label>
+    <button type="button" class="btn sm gh" id="btnJoin" data-t="landing.join"></button>
   </div>
-  <p class="foot muted" data-t="landing.soon"></p>
+  <p class="foot muted" id="landStatus"></p>
   <p class="foot"><small data-t="credit"></small></p>
   <p class="foot"><a href="https://games.csiesheep.com/">&larr; <span data-t="nav.hub"></span></a></p>
 </main>
@@ -69,6 +70,29 @@
   <button type="button" class="btn p" id="btnStart" data-t="setup.start"></button>
 </main>
 
+<!-- ===== Room lobby ===== -->
+<main id="view-lobby" class="scr" hidden>
+  <div class="bar"><button type="button" id="lbLeave" class="linkish" data-t="lobby.leave"></button><span data-t="lobby.room"></span></div>
+  <div class="code" id="lbCode">····</div>
+  <div class="row"><button type="button" class="btn sm gh" id="lbCopy" data-t="lobby.copy"></button><button type="button" class="btn sm gh" id="lbShare" data-t="lobby.share"></button></div>
+  <span class="lab" id="lbSeatsLab"></span>
+  <div class="list" id="lbSeats"></div>
+  <div id="lbHost" hidden>
+    <span class="lab" data-t="lobby.level"></span>
+    <div class="seg" id="lbLevel">
+      <button type="button" data-level="easy" data-t="setup.easy"></button>
+      <button type="button" data-level="normal" data-t="setup.normal"></button>
+      <button type="button" data-level="hard" data-t="setup.hard"></button>
+    </div>
+    <label class="field check"><span data-t="setup.blind"></span><input type="checkbox" id="lbBlind"></label>
+  </div>
+  <p class="note" id="lbStatus"></p>
+  <div class="log" id="lbLog"></div>
+  <div class="chat"><label class="field grow"><input id="lbChat" maxlength="200" autocomplete="off"></label><button type="button" class="btn sm gh" id="lbSend">↑</button></div>
+  <div class="spacer"></div>
+  <div class="row"><button type="button" class="btn" id="lbReady"></button><button type="button" class="btn p" id="lbStart" hidden></button></div>
+</main>
+
 <!-- ===== The table ===== -->
 <main id="view-table" class="scr" hidden>
   <div class="bar"><span id="barLeft"></span><span id="barRight"></span></div>
@@ -77,9 +101,11 @@
   <div class="ring" id="ring"></div>
   <div id="panel"></div>
   <div class="log" id="log" aria-live="polite"></div>
+  <div class="chat" id="chatRow" hidden><label class="field grow"><input id="chatIn" maxlength="200" autocomplete="off"></label><button type="button" class="btn sm gh" id="chatSend">↑</button></div>
+  <p class="foot" id="tableFoot" hidden><button type="button" class="linkish" id="tableLeave"></button></p>
 </main>
 
-<!-- ===== Reveal / game over overlay ===== -->
+<!-- ===== Reveal overlay ===== -->
 <div id="overlay" class="overlay" hidden></div>
 
 <script type="module" src="app.js"></script>

@@ -4,15 +4,17 @@ A browser version of *The Resistance*, the 5–10 player social-deduction game b
 
 Fan-made and unofficial. Own art and prose; the rules are the game's own.
 
-Live at https://games.csiesheep.com/the_resistance/ — solo mode is playable; online rooms are the next milestone.
+Live at https://games.csiesheep.com/the_resistance/ — solo against bots, or a room with friends.
 
 ## How it works
 
 Everything runs on Cloudflare as one Worker, the same shape as [Dice Wars](https://github.com/csiesheep/dice_war):
 
 - `public/` is the client: landing, setup, lobby and the table view, served as static assets. `public/shared/engine.js` holds all rules (tables, phase machine, per-seat view projection), `public/shared/bots.js` the AI and `public/shared/talk.js` the bots' table talk, all used unchanged by both the browser and the server. Every player-visible string is in `public/i18n/`.
-- `src/index.js` is the Worker: the path-prefix router that serves `/the_resistance/…` plus, from the multiplayer milestone, the WebSocket entry point at `/the_resistance/ws`.
-- `src/room.js` (to come) is a Durable Object, one per room, named by its code. It is authoritative: it deals the roles, keeps the phase clock, runs the AI seats, and sends each seat only what that seat may see.
+- `src/index.js` is the Worker: the path-prefix router that serves `/the_resistance/…` plus the WebSocket entry point at `/the_resistance/ws`.
+- `src/room.js` is a Durable Object, one per room, named by its code. It is authoritative: it deals the roles, applies every action through the engine, keeps the phase clock, runs the bot seats, and sends each seat only `view(state, seat)` — never the state. Connections use the WebSocket Hibernation API; all timers are the object's single alarm.
+
+Rules of the table: 30 s to read your card, 90 s to propose, 30 s to vote, 30 s to play a card; when time runs out the table decides for whoever has not acted. A player who drops is played by a bot after 15 s and gets the seat back by reopening the link in the same tab. A player who leaves mid-game becomes a bot. The host can add bots to fill seats, and a room nobody is connected to is deleted after 30 minutes. The room's language is the host's when it was created; it governs bot talk and the table log.
 
 URLs are query strings on the page so the same build works at any prefix:
 
@@ -26,7 +28,7 @@ URLs are query strings on the page so the same build works at any prefix:
 2. **M1 Engine** — tables, phase machine, reducer, `view(state, seat)`, tests. Done.
 3. **M2 Bots** — Bayesian suspicion model over spy sets, resistance and spy policies, three levels, a bot-vs-bot harness to tune win rates. Done.
 4. **M3 Solo** — the full game against bots in the browser, with bot table talk. Done.
-5. **M4 Rooms** — Durable Object, phase timers, chat, bot fill, disconnect takeover.
+5. **M4 Rooms** — Durable Object, phase timers, chat, bot fill, disconnect takeover. Done.
 6. **M5 Ship** — rules page, SEO, hub card, sitemap.
 
 ## Develop
