@@ -4,7 +4,7 @@ A browser version of *The Resistance*, the 5–10 player social-deduction game b
 
 Fan-made and unofficial. Own art and prose; the rules are the game's own.
 
-Live at https://games.csiesheep.com/the_resistance/ (a placeholder until the first playable milestone).
+Live at https://games.csiesheep.com/the_resistance/ — a placeholder until the first playable milestone.
 
 ## How it works
 
@@ -22,7 +22,7 @@ URLs are query strings on the page so the same build works at any prefix:
 
 ## Milestones
 
-1. **M0 Scaffold** — router, placeholder page, deploy. (this)
+1. **M0 Scaffold** — router, placeholder page, deploy. Done.
 2. **M1 Engine** — tables, phase machine, reducer, `view(state, seat)`, tests.
 3. **M2 Bots** — Bayesian suspicion model over spy sets, resistance and spy policies, three levels, a bot-vs-bot harness to tune win rates.
 4. **M3 Solo** — the full game against bots in the browser, with bot table talk.
@@ -40,4 +40,8 @@ Then open http://localhost:8787/the_resistance/.
 
 ## Deploy
 
-Pushes to `main` deploy through the Cloudflare dashboard's GitHub connection (Workers & Pages → the `the-resistance` project). The routes in `wrangler.jsonc` attach the Worker to `games.csiesheep.com/the_resistance` and `/the_resistance/*`; the `games` hub Worker keeps the hostname itself. `npm run deploy` does the same from a logged-in `wrangler`.
+```bash
+npm run deploy
+```
+
+Deploys from a logged-in `wrangler`. The routes in `wrangler.jsonc` attach the Worker to `games.csiesheep.com/the_resistance` and `/the_resistance/*`; the `games` hub Worker keeps the hostname itself. Pushes to `main` do not deploy on their own unless the repo is connected under Workers & Pages in the Cloudflare dashboard, as the sibling games are.
