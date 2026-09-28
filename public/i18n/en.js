@@ -7,7 +7,7 @@ export default {
   titleParts: ["The", "Resis", "tance"],
   tagline: "Five to ten of you. Two, three or four are spies. Send three missions through before they sink three.",
   credit: "Fan-made, unofficial. The Resistance is a game by Don Eskridge, published by Indie Boards & Cards.",
-  nav: { back: "Back", rules: "How to play", hub: "csiesheep games", lang: "中文" },
+  nav: { back: "Back", rules: "How to play", hub: "csiesheep games", lang: "中文", privacy: "Privacy" },
   landing: { play: "Play vs bots", create: "Create a room", join: "Join", code: "Room code", soon: "Rooms need a name: type yours below, then create or join.", badCode: "Enter the four-letter room code.", name: "Your name" },
   setup: {
     title: "Your table", sub: "You and {bots} bots.", players: "Players", bots: "Bots", name: "Your name",

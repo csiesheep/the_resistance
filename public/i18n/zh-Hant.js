@@ -5,7 +5,7 @@ export default {
   titleParts: ["抵抗", "組織", ""],
   tagline: "五到十個人，其中兩到四個是間諜。在他們搞砸三次任務之前，先完成三次。",
   credit: "同人自製，非官方。《抵抗組織》（The Resistance）由 Don Eskridge 設計，Indie Boards & Cards 出版。",
-  nav: { back: "返回", rules: "玩法說明", hub: "csiesheep games", lang: "EN" },
+  nav: { back: "返回", rules: "玩法說明", hub: "csiesheep games", lang: "EN", privacy: "隱私權政策" },
   landing: { play: "跟機器人玩", create: "開房間", join: "加入", code: "房間代碼", soon: "開房間要先有名字：在下面輸入，然後開房或加入。", badCode: "請輸入四個字的房間代碼。", name: "你的名字" },
   setup: {
     title: "你的牌桌", sub: "你和 {bots} 個機器人。", players: "人數", bots: "機器人", name: "你的名字",
